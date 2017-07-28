@@ -9,7 +9,7 @@ import {TodoModel} from "./model/todo-model";
 })
 export class AppComponent implements OnInit{
   todos: TodoModel[];
-  filter: 'all' | 'completed' | 'active' = 'active';
+  filter: 'all' | 'completed' | 'active' = 'all';
   constructor(private todosService: TodosService) {}
 
   ngOnInit() {
@@ -22,5 +22,13 @@ export class AppComponent implements OnInit{
 
   addTodo(todoText) {
     this.todos = this.todosService.addTodo(todoText);
+  }
+
+  deleteTodo(todo) {
+    this.todos = this.todosService.deleteTodo(todo);
+  }
+
+  updateTodo(todo: TodoModel) {
+
   }
 }

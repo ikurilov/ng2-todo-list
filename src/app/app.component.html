@@ -1,7 +1,7 @@
 <div class="container">
   <div class="panel panel-default">
     <todo-header (onAdd)="addTodo($event)"></todo-header>
-    <todo-list [todos]="todos | todoListFilter: filter"></todo-list>
+    <todo-list [todos]="todos | todoListFilter: filter" (onDelete)="deleteTodo($event)"></todo-list>
     <todo-footer (onFilter)="applyFilter($event)" ></todo-footer>
   </div>
 </div>

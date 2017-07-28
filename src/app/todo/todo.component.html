@@ -6,6 +6,9 @@
   {{todo | json}}
 </div>
 <div class="todo-buttons">
-  <button class="btn btn-default">Edit</button>
+  <div class="btn-group">
+    <button class="btn btn-default">Edit</button>
+    <button class="btn btn-danger" (click)="deleteTodo()">Delete</button>
+  </div>
 </div>
 

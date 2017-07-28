@@ -11,9 +11,13 @@ import {TodoModel} from "../model/todo-model";
 export class TodoComponent implements OnInit {
   @Input() todo: TodoModel;
   @Output() onEdit = new EventEmitter();
+  @Output() onDelete = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
   }
 
+  deleteTodo() {
+    this.onDelete.emit(this.todo);
+  }
 }

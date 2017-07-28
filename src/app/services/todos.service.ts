@@ -13,8 +13,18 @@ export class TodosService {
   constructor() { }
 
   addTodo(todoText: string) {
-    let newTodos = this.todos.concat(new TodoModel(todoText));
-    console.log(this.todos === newTodos);
-    return this.todos = newTodos;
+    let todos = this.todos.concat(new TodoModel(todoText));
+    return this.todos = todos;
+  }
+
+  updateTodo(todo: TodoModel) {
+    let todos = this.todos.slice(),
+      idx = todos.indexOf(todo);
+    todos[idx] = todo;
+    return this.todos = todos;
+  }
+
+  deleteTodo(todo: TodoModel) {
+    return this.todos = this.todos.filter(val => val !== todo);
   }
 }

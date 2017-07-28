@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'todo-list',
@@ -9,9 +9,13 @@ import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 })
 export class TodoListComponent implements OnInit {
   @Input() todos: any[];
+  @Output() onDelete = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
   }
 
+  onDeleteTodo(todo) {
+    this.onDelete.emit(todo);
+  }
 }

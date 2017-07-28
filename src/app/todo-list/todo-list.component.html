@@ -1,1 +1,2 @@
-<todo *ngFor="let todo of todos" [todo]="todo"></todo>
+<todo *ngFor="let todo of todos" [todo]="todo" (onDelete)="onDeleteTodo($event)"></todo>
+<div class="list-group-item" *ngIf="!todos.length">There is no todos</div>
