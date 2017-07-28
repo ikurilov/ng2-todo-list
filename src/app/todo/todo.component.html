@@ -1,0 +1,11 @@
+<div class="todo-toggle">
+  <input type="checkbox" [(ngModel)]="todo.completed">
+</div>
+<div class="todo-title">
+  {{todo.text}}
+  {{todo | json}}
+</div>
+<div class="todo-buttons">
+  <button class="btn btn-default">Edit</button>
+</div>
+
