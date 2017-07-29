@@ -1,14 +1,13 @@
 import {
-  ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild
+  ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild
 } from '@angular/core';
 import {Todo} from "../model/todo.model";
-
 @Component({
   selector: 'todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.less'],
   host: {'class': 'list-group-item'},
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoComponent {
   @ViewChild('todoitem') todoItem;
@@ -21,6 +20,9 @@ export class TodoComponent {
   @Output() onEdit = new EventEmitter();
   @Output() onDelete = new EventEmitter();
   @Output() onToggleEditing = new EventEmitter();
+
+  constructor(public el: ElementRef) {
+  }
 
   startEditingTodo() {
     if (!this.disabledEditing) {
