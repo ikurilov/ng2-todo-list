@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TodoModel} from "../model/todo-model";
+import {Todo} from "../model/todo.model";
 
 @Component({
   selector: 'todo',
@@ -9,7 +9,7 @@ import {TodoModel} from "../model/todo-model";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoComponent implements OnInit {
-  @Input() todo: TodoModel;
+  @Input() todo: Todo;
   @Output() onEdit = new EventEmitter();
   @Output() onDelete = new EventEmitter();
   constructor() { }
@@ -19,5 +19,19 @@ export class TodoComponent implements OnInit {
 
   deleteTodo() {
     this.onDelete.emit(this.todo);
+  }
+
+  updateTodo() {
+    this.onEdit.emit(this.todo);
+  }
+
+  toggleTodo() {
+    let updated = {...this.todo};
+    updated.completed = !updated.completed;
+    this.onEdit.emit(updated);
+  }
+
+  ngAfterContentChecked() {
+    console.log('check item', this.todo.text);
   }
 }

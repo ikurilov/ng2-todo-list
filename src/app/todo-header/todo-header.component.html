@@ -1,5 +1,5 @@
 <div class="input-group">
-  <input type="text" class="form-control" placeholder="I want to do..." [(ngModel)]="todoText">
+  <input type="text" class="form-control" placeholder="I want to do..." (keypress)="onKeyPress($event)" [(ngModel)]="todoText">
   <span class="input-group-btn">
     <button class="btn btn-primary" type="button" (click)="addTodo()">Add Todo</button>
   </span>

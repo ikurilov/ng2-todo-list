@@ -1,5 +1,5 @@
 <div class="todo-toggle">
-  <input type="checkbox" [(ngModel)]="todo.completed">
+  <input type="checkbox" [checked]="todo.completed" (click)="toggleTodo()">
 </div>
 <div class="todo-title">
   {{todo.text}}

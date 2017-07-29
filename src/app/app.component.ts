@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TodosService} from "./services/todos.service";
-import {TodoModel} from "./model/todo-model";
+import {Todo} from "./model/todo.model";
 
 @Component({
   selector: 'app',
@@ -8,7 +8,7 @@ import {TodoModel} from "./model/todo-model";
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit{
-  todos: TodoModel[];
+  todos: Todo[];
   filter: 'all' | 'completed' | 'active' = 'all';
   constructor(private todosService: TodosService) {}
 
@@ -28,7 +28,8 @@ export class AppComponent implements OnInit{
     this.todos = this.todosService.deleteTodo(todo);
   }
 
-  updateTodo(todo: TodoModel) {
-
+  updateTodo(todo: Todo) {
+    console.log(todo);
+    this.todos = this.todosService.updateTodo(todo);
   }
 }

@@ -1,4 +1,7 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+  AfterContentChecked, ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit,
+  Output
+} from '@angular/core';
 
 @Component({
   selector: 'todo-list',
@@ -7,9 +10,10 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output}
   host: {'class':'list-group'},
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, AfterContentChecked {
   @Input() todos: any[];
   @Output() onDelete = new EventEmitter();
+  @Output() onEdit = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
@@ -17,5 +21,13 @@ export class TodoListComponent implements OnInit {
 
   onDeleteTodo(todo) {
     this.onDelete.emit(todo);
+  }
+
+  onEditTodo(todo) {
+    this.onEdit.emit(todo);
+  }
+
+  ngAfterContentChecked() {
+    console.log('check list');
   }
 }

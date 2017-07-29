@@ -20,4 +20,10 @@ export class TodoHeaderComponent implements OnInit {
     this.onAdd.emit(this.todoText);
     this.todoText = null;
   }
+
+  onKeyPress(event: KeyboardEvent) {
+    if (event.keyCode === 13) {
+      this.addTodo();
+    }
+  }
 }
