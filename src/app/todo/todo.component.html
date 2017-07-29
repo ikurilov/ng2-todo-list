@@ -1,13 +1,24 @@
 <div class="todo-toggle">
   <input type="checkbox" [checked]="todo.completed" (click)="toggleTodo()">
 </div>
-<div class="todo-title" [ngClass]="{'completed': todo.completed}">
-  {{todo.text}}
+<div class="todo-title" [ngClass]="{'completed': todo.completed, 'editing': isEditing}" (dblclick)="toggleEditing()">
+  <span *ngIf="!isEditing">{{todo.text}}</span>
+  <input
+    [style.display]="!isEditing ? 'none' : ''"
+    #todoitem
+    type="text"
+    class="form-control input-sm"
+    [value]="todo.text"
+  >
 </div>
 <div class="todo-buttons">
   <div class="btn-group">
-    <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-pencil"></i></button>
-    <button class="btn btn-danger btn-sm" (click)="deleteTodo()"><i class="glyphicon glyphicon-remove"></i></button>
+    <button *ngIf="isEditing" (click)="updateTodo()" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-ok"></i></button>
+    <button class="btn btn-default btn-sm" [disabled]="this.disabledEditing" (click)="toggleEditing()">
+      <i *ngIf="!isEditing" class="glyphicon glyphicon-cog"></i>
+      <i *ngIf="isEditing" class="glyphicon glyphicon-ban-circle"></i>
+    </button>
   </div>
+  <button class="btn btn-danger btn-sm" (click)="deleteTodo()"><i class="glyphicon glyphicon-trash"></i></button>
 </div>
 

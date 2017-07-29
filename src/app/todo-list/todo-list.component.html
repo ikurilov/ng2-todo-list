@@ -1,2 +1,9 @@
-<todo *ngFor="let todo of todos" [todo]="todo" (onDelete)="onDeleteTodo($event)" (onEdit)="onEditTodo($event)"></todo>
+<todo
+  *ngFor="let todo of todos"
+  [todo]="todo"
+  [disabledEditing]="currentEditingTodo ? todo.id !== currentEditingTodo.id : false"
+  (onDelete)="onDeleteTodo($event)"
+  (onEdit)="onEditTodo($event)"
+  (onToggleEditing)="toggleEditingTodo($event)"
+></todo>
 <div class="list-group-item" *ngIf="!todos.length">There is no todos</div>
