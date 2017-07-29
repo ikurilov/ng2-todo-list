@@ -38,12 +38,4 @@ export class AppComponent {
   removeCompleted() {
     this.todosService.removeCompleted();
   }
-
-  getUncompletedTodosAmount() {
-    return this.todosService.todos.filter(item => !item.completed).length;
-  }
-
-  getCompletedTodosAmount() {
-    return this.todosService.todos.filter(item => item.completed).length;
-  }
 }

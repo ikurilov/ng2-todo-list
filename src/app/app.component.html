@@ -10,8 +10,8 @@
     ></todo-list>
     <todo-footer
       *ngIf="todosService.todos.length"
-      [uncompleted]="getUncompletedTodosAmount()"
-      [completed]="getCompletedTodosAmount()"
+      [uncompleted]="todosService.uncompleted"
+      [completed]="todosService.completed"
       [currentFilter]="filter"
       (onFilter)="applyFilter($event)"
       (onToggleAll)="toggleAllTodo($event)"
