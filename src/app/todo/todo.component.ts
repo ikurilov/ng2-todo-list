@@ -22,25 +22,23 @@ export class TodoComponent {
   @Output() onDelete = new EventEmitter();
   @Output() onToggleEditing = new EventEmitter();
 
-
-  deleteTodo() {
-    this.onDelete.emit(this.todo);
+  startEditingTodo() {
+    if (!this.disabledEditing) {
+      this.isEditing = true;
+      this.onToggleEditing.emit(this.todo);
+      // sorry for this hack :(
+      setTimeout(() => this.todoItem.nativeElement.focus());
+    }
   }
 
-  toggleEditing() {
-    this.onToggleEditing.emit(!this.isEditing ? this.todo : null);
-    if (!this.isEditing) {
-      setTimeout(()=>this.todoItem.nativeElement.focus());
-    }
-    else {
-      this.todoItem.nativeElement.value = this.todo.text;
-    }
-    this.isEditing = !this.isEditing;
+  cancelEditingTodo() {
+    this.isEditing = false;
+    this.onToggleEditing.emit();
+    this.todoItem.nativeElement.value = this.todo.text;
   }
-
-
 
   updateTodo() {
+    this.isEditing = false;
     this.onToggleEditing.emit();
     let newTodo = {...this.todo};
     newTodo.text = this.todoItem.nativeElement.value;
@@ -51,5 +49,15 @@ export class TodoComponent {
     let updated = {...this.todo};
     updated.completed = !updated.completed;
     this.onEdit.emit(updated);
+  }
+
+  deleteTodo() {
+    this.onDelete.emit(this.todo);
+  }
+
+  onKeypress(event: KeyboardEvent) {
+    if (event.keyCode === 13) {
+      this.updateTodo();
+    }
   }
 }

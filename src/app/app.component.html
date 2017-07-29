@@ -4,7 +4,7 @@
       (onAdd)="addTodo($event)"
     ></todo-header>
     <todo-list
-      [todos]="todos | todoListFilter: filter"
+      [todos]="todosService.todos | todoListFilter: filter"
       (onDelete)="deleteTodo($event)"
       (onEdit)="updateTodo($event)"
     ></todo-list>

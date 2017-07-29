@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {TodosService} from "./services/todos.service";
 import {Todo} from "./model/todo.model";
 
@@ -7,15 +7,10 @@ import {Todo} from "./model/todo.model";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
-export class AppComponent implements OnInit {
-  todos: Todo[];
+export class AppComponent {
   filter: 'all' | 'completed' | 'active' = 'all';
 
-  constructor(private todosService: TodosService) {
-  }
-
-  ngOnInit() {
-    this.todos = this.todosService.todos;
+  constructor(public todosService: TodosService) {
   }
 
   applyFilter(filter) {
@@ -25,19 +20,18 @@ export class AppComponent implements OnInit {
   }
 
   addTodo(todoText) {
-    this.todos = this.todosService.addTodo(todoText);
+    this.todosService.addTodo(todoText);
   }
 
   deleteTodo(todo) {
-    this.todos = this.todosService.deleteTodo(todo);
+    this.todosService.deleteTodo(todo);
   }
 
   updateTodo(todo: Todo) {
-    console.log(todo);
-    this.todos = this.todosService.updateTodo(todo);
+    this.todosService.updateTodo(todo);
   }
 
   completeAllTodo() {
-    this.todos = this.todosService.completeAll();
+    this.todosService.completeAll();
   }
 }
