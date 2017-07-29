@@ -9,7 +9,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class TodoHeaderComponent implements OnInit {
   @Output() onAdd = new EventEmitter();
 
-  todoText: string;
+  todoText: string = '';
 
   constructor() { }
 
@@ -17,8 +17,11 @@ export class TodoHeaderComponent implements OnInit {
   }
 
   addTodo() {
-    this.onAdd.emit(this.todoText);
-    this.todoText = null;
+    this.todoText = this.todoText.trim();
+    if (this.todoText.length) {
+      this.onAdd.emit(this.todoText);
+      this.todoText = '';
+    }
   }
 
   onKeyPress(event: KeyboardEvent) {

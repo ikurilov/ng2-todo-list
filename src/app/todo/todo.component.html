@@ -3,12 +3,11 @@
 </div>
 <div class="todo-title">
   {{todo.text}}
-  {{todo | json}}
 </div>
 <div class="todo-buttons">
   <div class="btn-group">
-    <button class="btn btn-default">Edit</button>
-    <button class="btn btn-danger" (click)="deleteTodo()">Delete</button>
+    <button class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i></button>
+    <button class="btn btn-danger" (click)="deleteTodo()"><i class="glyphicon glyphicon-remove"></i></button>
   </div>
 </div>
 
