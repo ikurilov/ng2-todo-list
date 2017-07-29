@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild
+  ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild
 } from '@angular/core';
 import {Todo} from "../model/todo.model";
 

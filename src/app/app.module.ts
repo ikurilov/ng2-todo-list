@@ -8,7 +8,7 @@ import {TodoHeaderComponent} from './todo-header/todo-header.component';
 import {TodoFooterComponent} from './todo-footer/todo-footer.component';
 import {TodosService} from "./services/todos.service";
 import {FormsModule} from "@angular/forms";
-import { TodoListFilterPipe } from './pipes/todo-list-filter.pipe';
+import {TodoListFilterPipe} from './pipes/todo-list-filter.pipe';
 
 @NgModule({
   declarations: [

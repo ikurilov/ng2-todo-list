@@ -1,5 +1,11 @@
-<button class="btn btn-default btn-sm pull-left" (click)="completeAll()"><i class="glyphicon glyphicon-ok"></i></button>
+<div class="pull-left">
+  <button class="btn btn-default btn-sm" (click)="toggleAll()" title="Toggle all">
+    <i *ngIf="uncompleted > 0" class="glyphicon glyphicon-ok"></i>
+    <i *ngIf="uncompleted === 0" class="glyphicon glyphicon-ban-circle"></i>
+  </button>
+  Uncompleted: {{uncompleted}}
+</div>
 <div class="btn-group">
   <button class="btn btn-default btn-sm" [ngClass]="{'active': currentFilter === filter.value}" (click)="apply(filter.value)" *ngFor="let filter of filters">{{filter.title}}</button>
 </div>
-<button class="btn btn-default btn-sm pull-right" (click)="deleteCompleted()"><i class="glyphicon glyphicon-trash"></i></button>
+<button [disabled]="completed === 0" class="btn btn-default btn-sm pull-right" title="Remove completed" (click)="removeCompleted()"><i class="glyphicon glyphicon-trash"></i></button>

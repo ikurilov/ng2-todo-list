@@ -1,40 +1,50 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Todo} from "../model/todo.model";
-
-const TODO_LIST = [
-  new Todo('tratata 1', false),
-  new Todo('tratata 2', true)
-];
 
 @Injectable()
 export class TodosService {
-  public todos = TODO_LIST;
+  public todos;
 
-  constructor() { }
+  constructor() {
+    this.todos = JSON.parse(localStorage.getItem('todos')) || [];
+  }
+
+  writeToStorage() {
+    localStorage.setItem('todos', JSON.stringify(this.todos));
+  }
 
   addTodo(todoText: string) {
-    let todos = this.todos.concat(new Todo(todoText));
-    return this.todos = todos;
+    this.todos = this.todos.concat(new Todo(todoText));
+    this.writeToStorage()
   }
 
   updateTodo(todo: Todo) {
-    return this.todos = this.todos.map(item => {
+    this.todos = this.todos.map(item => {
       return item.id === todo.id ? todo : item;
     });
+    this.writeToStorage();
   }
 
   deleteTodo(todo: Todo) {
-    return this.todos = this.todos.filter(val => val.id !== todo.id);
+    this.todos = this.todos.filter(val => val.id !== todo.id);
+    this.writeToStorage();
   }
 
-  completeAll() {
-    return this.todos = this.todos.map(val => {
-      if (val.completed === false) {
-        let newVal = {...val};
-        newVal.completed = true;
-        return newVal;
+  toggleAll(complete) {
+    this.todos = this.todos.map(val => {
+      if (complete && !val.completed) {
+        return {...val, completed: true};
+      }
+      else if (!complete && val.completed) {
+        return {...val, completed: false};
       }
       return val;
     });
+    this.writeToStorage();
+  }
+
+  removeCompleted() {
+    this.todos = this.todos.filter(item => !item.completed);
+    this.writeToStorage();
   }
 }

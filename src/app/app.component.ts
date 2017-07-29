@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TodosService} from "./services/todos.service";
 import {Todo} from "./model/todo.model";
 
@@ -31,7 +31,19 @@ export class AppComponent {
     this.todosService.updateTodo(todo);
   }
 
-  completeAllTodo() {
-    this.todosService.completeAll();
+  toggleAllTodo(complete) {
+    this.todosService.toggleAll(complete);
+  }
+
+  removeCompleted() {
+    this.todosService.removeCompleted();
+  }
+
+  getUncompletedTodosAmount() {
+    return this.todosService.todos.filter(item => !item.completed).length;
+  }
+
+  getCompletedTodosAmount() {
+    return this.todosService.todos.filter(item => item.completed).length;
   }
 }

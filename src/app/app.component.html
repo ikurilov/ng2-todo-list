@@ -9,9 +9,13 @@
       (onEdit)="updateTodo($event)"
     ></todo-list>
     <todo-footer
+      *ngIf="todosService.todos.length"
+      [uncompleted]="getUncompletedTodosAmount()"
+      [completed]="getCompletedTodosAmount()"
       [currentFilter]="filter"
       (onFilter)="applyFilter($event)"
-      (onCompleteAll)="completeAllTodo()"
+      (onToggleAll)="toggleAllTodo($event)"
+      (onRemoveCompleted)="removeCompleted()"
     ></todo-footer>
   </div>
 </div>
