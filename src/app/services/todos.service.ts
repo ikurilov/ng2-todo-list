@@ -9,6 +9,7 @@ export class TodosService {
 
   constructor() {
     this.todos = JSON.parse(localStorage.getItem('todos')) || [];
+    this.updateCounters();
   }
 
   addTodo(todoText: string) {
@@ -52,6 +53,10 @@ export class TodosService {
 
   writeToStorage() {
     localStorage.setItem('todos', JSON.stringify(this.todos));
+    this.updateCounters();
+  }
+
+  updateCounters() {
     this.completed = this.todos.filter(item => item.completed).length;
     this.uncompleted = this.todos.length - this.completed;
   }

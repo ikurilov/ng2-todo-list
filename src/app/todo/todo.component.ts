@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild
+  ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild
 } from '@angular/core';
 import {Todo} from "../model/todo.model";
 @Component({
@@ -9,7 +9,7 @@ import {Todo} from "../model/todo.model";
   host: {'class': 'list-group-item'},
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TodoComponent {
+export class TodoComponent implements OnChanges{
   @ViewChild('todoitem') todoItem;
 
   @Input() todo: Todo;
@@ -60,6 +60,13 @@ export class TodoComponent {
   onKeypress(event: KeyboardEvent) {
     if (event.keyCode === 13) {
       this.updateTodo();
+    }
+  }
+
+  ngOnChanges(changes) {
+    console.log(changes);
+    if (this.isEditing && changes.disabledEditing && changes.disabledEditing.currentValue) {
+      this.cancelEditingTodo();
     }
   }
 }

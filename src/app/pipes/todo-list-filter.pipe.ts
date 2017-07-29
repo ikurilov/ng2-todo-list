@@ -7,7 +7,6 @@ import {Todo} from "../model/todo.model";
 export class TodoListFilterPipe implements PipeTransform {
 
   transform(value: Todo[], filter: string = 'all'): any {
-    console.log('pipe');
     if (filter === 'completed') {
       return value.filter(val => val.completed);
     }
