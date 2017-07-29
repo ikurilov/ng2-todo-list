@@ -12,7 +12,6 @@ export class TodoComponent implements OnInit {
   @Input() todo: Todo;
   @Output() onEdit = new EventEmitter();
   @Output() onDelete = new EventEmitter();
-  constructor() { }
 
   ngOnInit() {
   }

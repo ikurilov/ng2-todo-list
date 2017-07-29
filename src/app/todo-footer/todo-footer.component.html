@@ -1,3 +1,5 @@
+<button class="btn btn-default btn-sm pull-left" (click)="completeAll()"><i class="glyphicon glyphicon-ok"></i></button>
 <div class="btn-group">
-  <button class="btn btn-default btn-sm" (click)="apply(filter.value)" *ngFor="let filter of filters">{{filter.title}}</button>
+  <button class="btn btn-default btn-sm" [ngClass]="{'active': currentFilter === filter.value}" (click)="apply(filter.value)" *ngFor="let filter of filters">{{filter.title}}</button>
 </div>
+<button class="btn btn-default btn-sm pull-right" (click)="deleteCompleted()"><i class="glyphicon glyphicon-trash"></i></button>

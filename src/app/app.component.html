@@ -9,7 +9,9 @@
       (onEdit)="updateTodo($event)"
     ></todo-list>
     <todo-footer
+      [currentFilter]="filter"
       (onFilter)="applyFilter($event)"
+      (onCompleteAll)="completeAllTodo()"
     ></todo-footer>
   </div>
 </div>

@@ -7,17 +7,21 @@ import {Todo} from "./model/todo.model";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   todos: Todo[];
   filter: 'all' | 'completed' | 'active' = 'all';
-  constructor(private todosService: TodosService) {}
+
+  constructor(private todosService: TodosService) {
+  }
 
   ngOnInit() {
     this.todos = this.todosService.todos;
   }
 
   applyFilter(filter) {
-    this.filter = filter;
+    if (this.filter !== filter) {
+      this.filter = filter;
+    }
   }
 
   addTodo(todoText) {
@@ -31,5 +35,9 @@ export class AppComponent implements OnInit{
   updateTodo(todo: Todo) {
     console.log(todo);
     this.todos = this.todosService.updateTodo(todo);
+  }
+
+  completeAllTodo() {
+    this.todos = this.todosService.completeAll();
   }
 }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'todo-footer',
@@ -8,7 +8,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class TodoFooterComponent implements OnInit {
   @Output() onFilter = new EventEmitter();
-
+  @Output() onDeleteCompleted = new EventEmitter();
+  @Output() onCompleteAll = new EventEmitter();
+  @Input() currentFilter;
   filters = [
     {
       title: 'All',
@@ -31,5 +33,13 @@ export class TodoFooterComponent implements OnInit {
 
   apply(filter) {
     this.onFilter.emit(filter);
+  }
+
+  deleteCompleted() {
+    this.onDeleteCompleted.emit();
+  }
+
+  completeAll() {
+    this.onCompleteAll.emit();
   }
 }

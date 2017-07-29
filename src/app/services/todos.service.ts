@@ -26,4 +26,15 @@ export class TodosService {
   deleteTodo(todo: Todo) {
     return this.todos = this.todos.filter(val => val.id !== todo.id);
   }
+
+  completeAll() {
+    return this.todos = this.todos.map(val => {
+      if (val.completed === false) {
+        let newVal = {...val};
+        newVal.completed = true;
+        return newVal;
+      }
+      return val;
+    });
+  }
 }
