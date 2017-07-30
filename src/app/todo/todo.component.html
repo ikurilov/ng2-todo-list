@@ -9,7 +9,7 @@
 <div class="todo-buttons">
   <div class="btn-group">
     <button *ngIf="isEditing" (click)="updateTodo()" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-ok"></i></button>
-    <button *ngIf="!isEditing" class="btn btn-default btn-sm" [disabled]="this.disabledEditing" (click)="startEditingTodo()">
+    <button *ngIf="!isEditing" class="btn btn-default btn-sm" (click)="startEditingTodo()">
       <i class="glyphicon glyphicon-cog"></i>
     </button>
     <button *ngIf="isEditing" class="btn btn-default btn-sm" (click)="cancelEditingTodo()">

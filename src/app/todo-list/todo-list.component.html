@@ -1,7 +1,6 @@
 <todo
-  *ngFor="let todo of todos"
+  *ngFor="let todo of todos; trackBy: todo?.id"
   [todo]="todo"
-  [disabledEditing]="currentEditingTodo ? todo.id !== currentEditingTodo.id : false"
   (onDelete)="onDeleteTodo($event)"
   (onEdit)="onEditTodo($event)"
   (onToggleEditing)="toggleEditingTodo($event)"

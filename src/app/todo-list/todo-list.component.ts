@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges,
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input,
   Output, QueryList, ViewChildren
 } from '@angular/core';
 import {Todo} from "../model/todo.model";
@@ -11,7 +11,7 @@ import {TodoComponent} from "../todo/todo.component";
   host: {'class': 'list-group'},
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoListComponent implements OnChanges{
+export class TodoListComponent {
   @Input() todos: any[];
   @Output() onDelete = new EventEmitter();
   @Output() onEdit = new EventEmitter();
@@ -50,11 +50,5 @@ export class TodoListComponent implements OnChanges{
 
   toggleEditingTodo(todo) {
     this.currentEditingTodo = todo ? todo : null;
-  }
-
-  ngOnChanges(changes) {
-    if (changes.todos) {
-      this.currentEditingTodo = null;
-    }
   }
 }

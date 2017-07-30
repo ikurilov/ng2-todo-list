@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild
+  ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild
 } from '@angular/core';
 import {Todo} from "../model/todo.model";
 @Component({
@@ -8,12 +8,12 @@ import {Todo} from "../model/todo.model";
   styleUrls: ['./todo.component.less'],
   host: {'class': 'list-group-item'},
   changeDetection: ChangeDetectionStrategy.OnPush,
+
 })
-export class TodoComponent implements OnChanges{
+export class TodoComponent {
   @ViewChild('todoitem') todoItem;
 
   @Input() todo: Todo;
-  @Input() disabledEditing: boolean;
   isEditing: boolean;
 
 
@@ -25,12 +25,10 @@ export class TodoComponent implements OnChanges{
   }
 
   startEditingTodo() {
-    if (!this.disabledEditing) {
-      this.isEditing = true;
-      this.onToggleEditing.emit(this.todo);
-      // sorry for this hack :(
-      setTimeout(() => this.todoItem.nativeElement.focus());
-    }
+    this.isEditing = true;
+    this.onToggleEditing.emit(this.todo);
+    // sorry for this hack :(
+    setTimeout(() => this.todoItem.nativeElement.focus());
   }
 
   cancelEditingTodo() {
@@ -60,13 +58,6 @@ export class TodoComponent implements OnChanges{
   onKeypress(event: KeyboardEvent) {
     if (event.keyCode === 13) {
       this.updateTodo();
-    }
-  }
-
-  ngOnChanges(changes) {
-    console.log(changes);
-    if (this.isEditing && changes.disabledEditing && changes.disabledEditing.currentValue) {
-      this.cancelEditingTodo();
     }
   }
 }
