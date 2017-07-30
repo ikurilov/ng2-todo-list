@@ -3,13 +3,26 @@ import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListe
 } from '@angular/core';
 import {Todo} from "../model/todo.model";
 import {TodoComponent} from "../todo/todo.component";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.less'],
   host: {'class': 'list-group'},
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('flyInOut', [
+      //state('in', style({transform: 'translateX(0)'})),
+      transition(':enter', [
+        style({transform: 'translateX(-100%)', opacity: 0}),
+        animate(300)
+      ]),
+      transition(':leave', [
+        animate(300, style({transform: 'translateX(100%)', opacity: 0}))
+      ])
+    ])
+  ]
 })
 export class TodoListComponent {
   @Input() todos: any[];
@@ -51,4 +64,6 @@ export class TodoListComponent {
   toggleEditingTodo(todo) {
     this.currentEditingTodo = todo ? todo : null;
   }
+
+  trackByTodos(idx: number, todo: Todo): string { return todo.id; }
 }

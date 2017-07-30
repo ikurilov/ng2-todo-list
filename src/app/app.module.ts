@@ -9,6 +9,7 @@ import {TodoFooterComponent} from './todo-footer/todo-footer.component';
 import {TodosService} from "./services/todos.service";
 import {FormsModule} from "@angular/forms";
 import {TodoListFilterPipe} from './pipes/todo-list-filter.pipe';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {TodoListFilterPipe} from './pipes/todo-list-filter.pipe';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule
   ],
   providers: [TodosService],

@@ -1,5 +1,6 @@
 <todo
-  *ngFor="let todo of todos; trackBy: todo?.id"
+  *ngFor="let todo of todos; trackBy: trackByTodos"
+  [@flyInOut]="'in'"
   [todo]="todo"
   (onDelete)="onDeleteTodo($event)"
   (onEdit)="onEditTodo($event)"

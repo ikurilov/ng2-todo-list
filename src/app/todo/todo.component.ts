@@ -2,13 +2,13 @@ import {
   ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild
 } from '@angular/core';
 import {Todo} from "../model/todo.model";
+
 @Component({
   selector: 'todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.less'],
   host: {'class': 'list-group-item'},
   changeDetection: ChangeDetectionStrategy.OnPush,
-
 })
 export class TodoComponent {
   @ViewChild('todoitem') todoItem;
@@ -26,7 +26,6 @@ export class TodoComponent {
 
   startEditingTodo() {
     this.isEditing = true;
-    this.onToggleEditing.emit(this.todo);
     // sorry for this hack :(
     setTimeout(() => this.todoItem.nativeElement.focus());
   }
@@ -59,5 +58,9 @@ export class TodoComponent {
     if (event.keyCode === 13) {
       this.updateTodo();
     }
+  }
+
+  setCurrentTodo() {
+    this.onToggleEditing.emit(this.todo);
   }
 }
