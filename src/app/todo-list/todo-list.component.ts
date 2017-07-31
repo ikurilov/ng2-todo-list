@@ -1,19 +1,18 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input,
+import {
+  ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input,
   Output, QueryList, ViewChildren
 } from '@angular/core';
-import {Todo} from "../model/todo.model";
-import {TodoComponent} from "../todo/todo.component";
-import {animate, style, transition, trigger} from "@angular/animations";
+import {Todo} from '../model/todo.model';
+import {TodoItemComponent} from '../todo-item/todo-item.component';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.less'],
-  host: {'class': 'list-group'},
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('flyInOut', [
-      //state('in', style({transform: 'translateX(0)'})),
       transition(':enter', [
         style({transform: 'translateX(-100%)', opacity: 0}),
         animate(300)
@@ -28,23 +27,23 @@ export class TodoListComponent {
   @Input() todos: any[];
   @Output() onDelete = new EventEmitter();
   @Output() onEdit = new EventEmitter();
-  @ViewChildren(TodoComponent) todoComponents: QueryList<TodoComponent>;
+  @HostBinding('class') hostClass = 'list-group';
+  @ViewChildren(TodoItemComponent) todoComponents: QueryList<TodoItemComponent>;
   currentEditingTodo: Todo;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     if (this.currentEditingTodo) {
-      let todoElement = this.todoComponents.find(comp => comp.todo.id === this.currentEditingTodo.id).el.nativeElement,
+      const todoElement = this.todoComponents.find(comp => comp.todo.id === this.currentEditingTodo.id).el.nativeElement,
         todoListElement = this.el.nativeElement,
         todoOffsetTop = todoElement.offsetTop,
         todoOffsetHeight = todoElement.offsetHeight,
         todoListScrollTop = todoListElement.scrollTop,
         todoListHeight = todoListElement.offsetHeight,
-        newScrollTop = todoOffsetTop - (todoListHeight/2) + (todoOffsetHeight/2);
+        newScrollTop = todoOffsetTop - (todoListHeight / 2) + (todoOffsetHeight / 2);
       if (todoListScrollTop > todoOffsetTop) {
         todoListElement.scrollTop = newScrollTop;
-      }
-      else if (todoListScrollTop + todoListHeight < todoOffsetTop + todoOffsetHeight) {
+      } else if (todoListScrollTop + todoListHeight < todoOffsetTop + todoOffsetHeight) {
         todoListElement.scrollTop = newScrollTop;
       }
     }

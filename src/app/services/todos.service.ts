@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Todo} from "../model/todo.model";
+import {Todo} from '../model/todo.model';
 
 @Injectable()
 export class TodosService {
@@ -33,8 +33,7 @@ export class TodosService {
     this.todos = this.todos.map(val => {
       if (complete && !val.completed) {
         return {...val, completed: true};
-      }
-      else if (!complete && val.completed) {
+      } else if (!complete && val.completed) {
         return {...val, completed: false};
       }
       return val;

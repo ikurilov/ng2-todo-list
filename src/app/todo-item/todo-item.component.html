@@ -4,6 +4,7 @@
 <div class="todo-title" [ngClass]="{'completed': todo.completed, 'editing': isEditing}" (dblclick)="startEditingTodo()">
   <span *ngIf="!isEditing">{{todo.text}}</span>
   <input
+    autoFocus
     type="text"
     class="form-control input-sm"
     *ngIf="isEditing" #todoitem

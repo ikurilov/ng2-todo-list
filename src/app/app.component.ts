@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {TodosService} from "./services/todos.service";
-import {Todo} from "./model/todo.model";
+import {Component} from '@angular/core';
+import {TodosService} from './services/todos.service';
+import {Todo} from './model/todo.model';
 
 @Component({
-  selector: 'app',
+  selector: 'todo-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })

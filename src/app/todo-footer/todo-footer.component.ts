@@ -1,12 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, HostBinding, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'todo-footer',
   templateUrl: './todo-footer.component.html',
   styleUrls: ['./todo-footer.component.less'],
-  host: {'class':'panel-footer'},
 })
 export class TodoFooterComponent implements OnInit {
+  @HostBinding('class') hostClass = 'panel-footer';
   @Output() onFilter = new EventEmitter();
   @Output() onRemoveCompleted = new EventEmitter();
   @Output() onToggleAll = new EventEmitter();

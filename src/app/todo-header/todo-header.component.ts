@@ -1,15 +1,14 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, HostBinding, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'todo-header',
   templateUrl: './todo-header.component.html',
   styleUrls: ['./todo-header.component.less'],
-  host: {'class':'panel-heading'}
 })
 export class TodoHeaderComponent implements OnInit {
   @Output() onAdd = new EventEmitter();
-
-  todoText: string = '';
+  @HostBinding('class') hostClass = 'panel-heading';
+  todoText = '';
 
   constructor() { }
 

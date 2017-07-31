@@ -1,18 +1,17 @@
 import {
-  ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild
+  ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding, Input, Output, ViewChild
 } from '@angular/core';
-import {Todo} from "../model/todo.model";
+import {Todo} from '../model/todo.model';
 
 @Component({
-  selector: 'todo',
-  templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.less'],
-  host: {'class': 'list-group-item'},
+  selector: 'todo-item',
+  templateUrl: './todo-item.component.html',
+  styleUrls: ['./todo-item.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TodoComponent {
+export class TodoItemComponent {
   @ViewChild('todoitem') todoItem;
-
+  @HostBinding('class') hostClass = 'list-group-item';
   @Input() todo: Todo;
   isEditing: boolean;
 
@@ -27,7 +26,7 @@ export class TodoComponent {
   startEditingTodo() {
     this.isEditing = true;
     // sorry for this hack :(
-    setTimeout(() => this.todoItem.nativeElement.focus());
+    // setTimeout(() => this.todoItem.nativeElement.focus());
   }
 
   cancelEditingTodo() {
@@ -39,13 +38,13 @@ export class TodoComponent {
   updateTodo() {
     this.isEditing = false;
     this.onToggleEditing.emit();
-    let newTodo = {...this.todo};
+    const newTodo = {...this.todo};
     newTodo.text = this.todoItem.nativeElement.value;
     this.onEdit.emit(newTodo);
   }
 
   toggleTodo() {
-    let updated = {...this.todo};
+    const updated = {...this.todo};
     updated.completed = !updated.completed;
     this.onEdit.emit(updated);
   }

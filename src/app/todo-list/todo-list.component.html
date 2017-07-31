@@ -1,9 +1,9 @@
-<todo
+<todo-item
   *ngFor="let todo of todos; trackBy: trackByTodos"
   [@flyInOut]="'in'"
   [todo]="todo"
   (onDelete)="onDeleteTodo($event)"
   (onEdit)="onEditTodo($event)"
   (onToggleEditing)="toggleEditingTodo($event)"
-></todo>
+></todo-item>
 <div class="list-group-item" *ngIf="!todos.length">There is no todos</div>
